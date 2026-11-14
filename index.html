@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FoodSave – Food Waste Reduction Management System</title>
+<style>
+:root{--bg:#fff;--alt:#f3f7fb;--tx:#0e2036;--mu:#566a80;--pr:#0b3d6b;--ac:#12a594;--prt:#fff;--bd:#dbe4ee;--er:#c62828;--wn:#d97706;--hero:linear-gradient(135deg,#0b3d6b,#0f6a80 60%,#12a594);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1522;--alt:#101e30;--tx:#e8eff7;--mu:#98abc0;--pr:#6cb6ff;--ac:#2dd4bf;--prt:#06121f;--bd:#243a52;--er:#ef5350;--wn:#fbbf24}}
+:root[data-theme="dark"]{--bg:#0b1522;--alt:#101e30;--tx:#e8eff7;--mu:#98abc0;--pr:#6cb6ff;--ac:#2dd4bf;--prt:#06121f;--bd:#243a52;--er:#ef5350;--wn:#fbbf24}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:1040px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--bd)}
+header .w{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;flex-wrap:wrap}
+.logo{font-weight:800;font-size:20px;color:var(--pr);cursor:pointer}.logo i{color:var(--ac);font-style:normal}
+nav{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+nav a{padding:8px 12px;color:var(--tx);cursor:pointer;font-size:15px;border-radius:8px}nav a:hover{background:var(--alt)}
+button{background:var(--pr);color:var(--prt);border:0;border-radius:8px;padding:10px 18px;font:inherit;font-weight:600;cursor:pointer}
+button.s{background:transparent;color:var(--pr);border:1.5px solid var(--pr)}button.l{background:#fff;color:#0b3d6b}
+.hero{background:var(--hero);color:#fff;padding:84px 0 72px}.hero h1{font-size:clamp(32px,5vw,52px);line-height:1.1;margin:0 0 16px;max-width:720px;letter-spacing:-.02em}
+.hero p{font-size:19px;max-width:600px;opacity:.92;margin:0 0 28px}.hero .b{display:flex;gap:12px;flex-wrap:wrap}.hero button.s{color:#fff;border-color:#fff}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;border:1px solid var(--bd);border-radius:14px;margin-top:-36px;background:var(--bg);position:relative;overflow:hidden}
+.stats div{padding:22px;text-align:center;border-right:1px solid var(--bd)}.stats b{display:block;font-size:30px;color:var(--pr)}.stats span{color:var(--mu);font-size:14px}
+section{padding:64px 0}section.alt{background:var(--alt)}h2{font-size:30px;letter-spacing:-.01em;margin:0 0 8px}.lead{color:var(--mu);max-width:640px;margin:0 0 32px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.c{background:var(--bg);border:1px solid var(--bd);border-radius:14px;padding:22px}.c h3{margin:6px 0}.c p{margin:0;color:var(--mu);font-size:15px}
+.n{width:36px;height:36px;border-radius:50%;background:var(--ac);color:var(--prt);display:grid;place-items:center;font-weight:700}
+.ic{font-size:26px}
+footer{border-top:1px solid var(--bd);padding:28px 0;color:var(--mu);font-size:14px}
+.crumb{font-size:14px;color:var(--mu);padding:18px 0 4px}.crumb a{color:var(--pr);cursor:pointer}
+main{padding-bottom:50px}.card{background:var(--bg);border:1px solid var(--bd);border-radius:14px;padding:22px;margin:14px 0}
+.card.alt{background:var(--alt)}label{display:block;font-size:14px;color:var(--mu);margin:12px 0 4px}
+input,select{width:100%;padding:11px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+.msg{padding:10px 13px;border-radius:8px;margin:10px 0;font-size:14px}.err{background:color-mix(in srgb,var(--er) 14%,transparent);color:var(--er)}.ok{background:color-mix(in srgb,var(--ac) 18%,transparent);color:var(--pr)}
+.item{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;border-top:1px solid var(--bd);padding:14px 0}.item:first-of-type{border-top:0}.mu{color:var(--mu);font-size:14px}
+.tag{font-size:12px;padding:2px 10px;border-radius:99px;border:1px solid var(--wn);color:var(--wn)}.tag.Completed,.tag.Confirmed{border-color:var(--ac);color:var(--ac)}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px}td,th{text-align:left;padding:8px;border-bottom:1px solid var(--bd)}
+.big{font-size:32px;font-weight:700;color:var(--pr)}.au{max-width:430px;margin:40px auto}
+</style></head><body>
+<header><div class="w"><div class="logo" onclick="go(me?(me.role==='admin'?'admin':'home'):'landing')">Food<i>Save</i></div><nav id="nav"></nav></div></header>
+<div id="app"></div>
+<script>
+let DB,me=null,view='landing',note='';
+function load(){try{const d=JSON.parse(localStorage.getItem('fs'));if(d)return d}catch(e){}
+return{users:[{id:1,name:'Admin',email:'admin@foodsave.com',password:'admin123',role:'admin'}],donations:[],requests:[],notifs:[],n:1}}
+function save(){try{localStorage.setItem('fs',JSON.stringify(DB))}catch(e){}}
+DB=load();
+const id=()=>++DB.n,$=i=>document.getElementById(i),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const uname=i=>(DB.users.find(u=>u.id===i)||{}).name||'?',emailOk=e=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+function notify(u,m){DB.notifs.push({id:id(),userId:u,msg:m,time:new Date().toLocaleString()})}
+function go(v,m,s){view=v;note=m||'';render();window.scrollTo(0,0);if(s)setTimeout(()=>{const e=$(s);e&&e.scrollIntoView()},0)}
+const msg=t=>t?`<div class="msg ${/saved|created|submitted|confirmed|completed|logged/i.test(t)?'ok':'err'}">${esc(t)}</div>`:'';
+function register(){const n=$('n').value.trim(),e=$('e').value.trim(),p=$('p').value,r=$('r').value;
+ if(!n||!e||!p)return go('register','Please fill in all fields.');if(!emailOk(e))return go('register','Error: invalid email address.');
+ if(p.length<6)return go('register','Password must be at least 6 characters.');
+ if(DB.users.some(u=>u.email.toLowerCase()===e.toLowerCase()))return go('register','This email is already registered.');
+ DB.users.push({id:id(),name:n,email:e,password:p,role:r});save();go('login','Account created. Please log in.')}
+function login(){const e=$('e').value.trim(),p=$('p').value;if(!emailOk(e))return go('login','Error: invalid email address.');
+ const u=DB.users.find(u=>u.email.toLowerCase()===e.toLowerCase()&&u.password===p);if(!u)return go('login','Error: wrong email or password.');
+ me=u;go(u.role==='admin'?'admin':'home')}
+function logout(){me=null;go('login','You have been logged out.')}
+function addFood(){const n=$('fn').value.trim(),q=$('fq').value.trim(),l=$('fl').value.trim(),b=$('fb').value;
+ if(!n)return go('donate','Validation: food name is required.');if(!q||!l||!b)return go('donate','Validation: quantity, pickup location and best-before time are required.');
+ DB.donations.push({id:id(),donorId:me.id,name:n,qty:q,loc:l,best:b,status:'Available',ngoId:null});
+ DB.users.filter(u=>u.role==='ngo').forEach(u=>notify(u.id,`New food available: ${n} (${q}) at ${l}`));save();go('mine','Food details saved.')}
+function request(i){const d=DB.donations.find(x=>x.id===i);if(!d||d.status!=='Available')return;d.status='Requested';d.ngoId=me.id;
+ DB.requests.push({id:id(),ngoId:me.id,donationId:i,status:'Pending'});notify(d.donorId,`${me.name} requested your donation: ${d.name}`);save();go('mine','Request submitted.')}
+function confirmReq(i){const d=DB.donations.find(x=>x.id===i),r=DB.requests.find(x=>x.donationId===i);d.status='Confirmed';r.status='Confirmed';
+ notify(d.ngoId,`Your request for ${d.name} was confirmed. Please collect it.`);save();go(view,'Request confirmed.')}
+function complete(i){const d=DB.donations.find(x=>x.id===i);d.status='Completed';notify(d.donorId,`Donation ${d.name} marked completed.`);
+ if(d.ngoId)notify(d.ngoId,`Collection of ${d.name} completed.`);save();go(view,'Donation completed.')}
+
+function nav(){const n=$('nav');
+ if(!me){n.innerHTML=`<a onclick="go('landing','','how')">How it works</a><a onclick="go('landing','','features')">Features</a><a onclick="go('landing','','who')">Who it’s for</a><button class="s" onclick="go('login')">Log in</button><button onclick="go('register')">Get started</button>`;return}
+ const l=me.role==='admin'?[['admin','Dashboard']]:[['home','Home'],['avail','Available food'],['mine',me.role==='ngo'?'My requests':'My donations'],['notes','Notifications']];
+ n.innerHTML=l.map(([v,t])=>`<a onclick="go('${v}')">${t}</a>`).join('')+`<button class="s" onclick="logout()">Log out</button>`}
+const T={home:'Home',donate:'Donate food',avail:'Available food',mine:'My activity',notes:'Notifications',admin:'Admin dashboard'};
+function crumb(){const h=me.role==='admin'?'admin':'home';return`<div class="crumb"><a onclick="go('${h}')">FoodSave</a> / ${T[view]}</div>`}
+function foodItem(d,a){return`<div class="item"><div><b>${esc(d.name)}</b> <span class="tag ${d.status}">${d.status}</span><div class="mu">Qty: ${esc(d.qty)} · ${esc(d.loc)} · Best before: ${esc(d.best.replace('T',' '))}</div><div class="mu">Donor: ${esc(uname(d.donorId))}${d.ngoId?' · NGO: '+esc(uname(d.ngoId)):''}</div></div><div>${a||''}</div></div>`}
+function actions(d){let a='';if(d.status==='Requested'&&me.role!=='ngo')a+=`<button onclick="confirmReq(${d.id})">Confirm</button> `;
+ if(d.status==='Confirmed'&&me.role!=='ngo')a+=`<button onclick="complete(${d.id})">Mark completed</button>`;return a}
+
+function landing(){const D=DB.donations,f=s=>D.filter(d=>d.status===s).length;
+return`<div class="hero"><div class="w"><h1>Surplus food, matched to the people who need it.</h1><p>FoodSave connects restaurants, hotels, shops and homes with NGOs through one digital platform, so good food gets eaten instead of thrown away.</p><div class="b"><button class="l" onclick="go('register')">Start donating</button><button class="s" onclick="go('login')">NGO login</button></div></div></div>
+<div class="w"><div class="stats"><div><b>${D.length}</b><span>Donations listed</span></div><div><b>${f('Completed')}</b><span>Completed pickups</span></div><div><b>${DB.users.filter(u=>u.role==='ngo').length}</b><span>NGOs on board</span></div><div><b>${DB.users.length-1}</b><span>Registered users</span></div></div></div>
+<section id="how"><div class="w"><h2>How it works</h2><p class="lead">Six simple steps from extra food to a completed donation.</p><div class="g">
+${[['A donor logs in and adds extra food details.'],['The system checks the information and saves it.'],['An NGO searches for available food.'],['The NGO sends a request for suitable food.'],['The donor or admin confirms the request.'],['After collection, the donation is marked completed.']].map((s,i)=>`<div class="c"><div class="n">${i+1}</div><h3>Step ${i+1}</h3><p>${s[0]}</p></div>`).join('')}</div></div></section>
+<section class="alt" id="features"><div class="w"><h2>Everything in one platform</h2><p class="lead">Built around the seven core features of the FoodSave design.</p><div class="g">
+${[['🔐','Registration and login','Secure accounts for donors, NGOs and admins.'],['🍲','Food donation','Add name, quantity, pickup location and best-before time.'],['🔎','Food search','NGOs browse the food available to them.'],['🤝','Food requests','Request a listed donation in one click.'],['🔔','Notifications','Live updates about requests and collection.'],['📊','Admin panel','Monitor users, donations and requests.']].map(x=>`<div class="c"><div class="ic">${x[0]}</div><h3>${x[1]}</h3><p>${x[2]}</p></div>`).join('')}</div></div></section>
+<section id="who"><div class="w"><h2>Who it’s for</h2><p class="lead">Three roles, one shared goal: reduce food waste.</p><div class="g">
+<div class="c"><h3>Donors</h3><p>Restaurants, hotels, shops and homes with extra food to give.</p></div><div class="c"><h3>NGOs</h3><p>Organisations that collect and distribute food to people in need.</p></div><div class="c"><h3>Admins</h3><p>Keep the platform trustworthy by monitoring records.</p></div></div></div></section>
+`}
+
+function page(){const m=msg(note);
+ if(view==='register')return`<div class="w"><div class="card au"><h2>Create your account</h2>${m}<label>Name</label><input id="n"><label>Email</label><input id="e"><label>Password</label><input id="p" type="password"><label>I am a</label><select id="r"><option value="donor">Donor (restaurant, hotel, shop, home)</option><option value="ngo">NGO</option></select><p><button onclick="register()">Register</button> <button class="s" onclick="go('login')">Back to login</button></p></div></div>`;
+ if(view==='login')return`<div class="w"><div class="card au"><h2>Welcome back</h2>${m}<label>Email</label><input id="e"><label>Password</label><input id="p" type="password"><p><button onclick="login()">Log in</button> <button class="s" onclick="go('register')">Register</button></p><p class="mu">Admin demo: admin@foodsave.com / admin123</p></div></div>`;
+ let h=crumb()+m;
+ if(view==='home')h+=`<h2>Welcome, ${esc(me.name)}</h2><p class="lead">What would you like to do today?</p><div class="g">${me.role==='donor'?`<div class="c" style="cursor:pointer" onclick="go('donate')"><div class="ic">🍲</div><h3>Donate food</h3><p>List extra food for NGOs.</p></div>`:''}<div class="c" style="cursor:pointer" onclick="go('avail')"><div class="ic">🔎</div><h3>Available food</h3><p>See what can be collected.</p></div><div class="c" style="cursor:pointer" onclick="go('mine')"><div class="ic">📋</div><h3>${me.role==='ngo'?'My requests':'My donations'}</h3><p>Track status updates.</p></div></div>`;
+ if(view==='donate')h+=`<div class="card"><h2>Donate food</h2><label>Food name</label><input id="fn"><label>Quantity</label><input id="fq" placeholder="e.g. 20 meal boxes"><label>Pickup location</label><input id="fl"><label>Best-before date/time</label><input id="fb" type="datetime-local"><p><button onclick="addFood()">Submit donation</button> <button class="s" onclick="go('home')">Cancel</button></p></div>`;
+ if(view==='avail'){const l=DB.donations.filter(d=>d.status==='Available');h+=`<div class="card"><h2>Available food</h2>${l.map(d=>foodItem(d,me.role==='ngo'?`<button onclick="request(${d.id})">Request</button>`:'')).join('')||'<p class="mu">No food available right now.</p>'}</div>`}
+ if(view==='mine'){const l=DB.donations.filter(d=>me.role==='ngo'?d.ngoId===me.id:d.donorId===me.id);h+=`<div class="card"><h2>${me.role==='ngo'?'My requests':'My donations'}</h2>${l.map(d=>foodItem(d,actions(d))).join('')||'<p class="mu">Nothing here yet.</p>'}</div>`}
+ if(view==='notes'){const l=DB.notifs.filter(n=>n.userId===me.id).reverse();h+=`<div class="card"><h2>Notifications</h2>${l.map(n=>`<div class="item"><div>${esc(n.msg)}</div><div class="mu">${esc(n.time)}</div></div>`).join('')||'<p class="mu">No notifications.</p>'}</div>`}
+ if(view==='admin'){const D=DB.donations,c=s=>D.filter(d=>d.status===s).length;
+  h+=`<h2>Admin dashboard</h2><div class="g">${[['Total users',DB.users.length],['Donations',D.length],['Pending requests',c('Requested')],['Completed donations',c('Completed')]].map(([t,v])=>`<div class="card"><div class="big">${v}</div><div class="mu">${t}</div></div>`).join('')}</div>
+  <div class="card"><h2>Users</h2><div class="tw"><table><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th></tr>${DB.users.map(u=>`<tr><td>${u.id}</td><td>${esc(u.name)}</td><td>${esc(u.email)}</td><td>${u.role}</td></tr>`).join('')}</table></div></div>
+  <div class="card"><h2>Donations and requests</h2>${D.map(d=>foodItem(d,actions(d))).join('')||'<p class="mu">No donations yet.</p>'}</div>`}
+ return`<div class="w"><main>${h}</main></div>`}
+function render(){nav();$('app').innerHTML=view==='landing'&&!me?landing():page()}
+render();
+</script></body></html>
