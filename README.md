@@ -2,8 +2,6 @@
 
 FoodSave is a small web app that connects people with extra food (restaurants, hotels, shops, homes) to NGOs who can collect and distribute it. I built it for my Software Engineering assignment.
 
-**Live demo:** https://priyamp1475.github.io/foodsave/
-
 ## Features
 
 - Register and log in as a Donor or NGO
